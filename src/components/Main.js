@@ -10,7 +10,7 @@ export default function Main(){
     //opciones de request, falta hacerlo declarativo
     const options = {
         page: 1,
-        limit: 10,
+        limit: 20,
     }
 
     useEffect(()=>{
@@ -21,17 +21,18 @@ export default function Main(){
  
     return  <>
         <Search />
-    
-    
+
+        <div className="wrapper">     
+                <main className="content">
+                {
+                    shown ? shown.map(each => <Dog key={each.id} {...each}/>) : ''
+                }
+                </main> 
+            </div>
+
+        <button className="pageup">Next</button>
     </>
     
-        // <div className="wrapper">     
-        //            <main className="content">
-        //         {
-        //             shown.map(each => <Dog key={each.id} {...each}/>)
-        //         }
-        //         </main>
-        //     </div>
 
     
 } 
