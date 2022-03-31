@@ -1,3 +1,14 @@
 * {
-    background-color: #02394A;
+    background-color: #E3E2E2;
+}
+
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('./fonts/NotoSerif-Regular.ttf');
+}
+
+
+@font-face {
+    font-family: 'Noto Serif Bold';
+    src: url('./fonts/NotoSerif-Bold.ttf');
 }

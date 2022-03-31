@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
 import getDogs from "../services/getDogs"
-import Loader from "./Loader"
 import Dog from "./Dog"
-import Aside from "./Aside"
+import Search from "./Search"
 import './Main.css'
 
 export default function Main(){
-    const [dogs, setDogs] = useState()
+    const [shown, setShown] = useState()
     
     //opciones de request, falta hacerlo declarativo
     const options = {
@@ -16,20 +15,23 @@ export default function Main(){
 
     useEffect(()=>{
         //request
-        getDogs(options).then(res => setDogs(res))
+        getDogs(options).then(res => setShown(res))
     },[])
 
-    if (dogs) {
-        return <div className="wrapper"> 
-        <main className="content">
-            {
-                dogs.map(each => <Dog key={each.id} {...each}/>)
-            }
-        </main>
-        <Aside/>
-        </div>
-    }
+ 
+    return  <>
+        <Search />
+    
+    
+    </>
+    
+        // <div className="wrapper">     
+        //            <main className="content">
+        //         {
+        //             shown.map(each => <Dog key={each.id} {...each}/>)
+        //         }
+        //         </main>
+        //     </div>
 
-    else return <Loader />
     
 } 

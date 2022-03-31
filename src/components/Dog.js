@@ -1,9 +1,7 @@
 import './Dog.css'
-import Loader from './Loader'
 
 export default function Dog({url, breeds}){
-    if(!breeds[0]) return <Loader/>
-
+    if(!breeds[0]) return <h1>CARGANDO</h1>
     //the dog details
     const stuff = breeds[0]
     
