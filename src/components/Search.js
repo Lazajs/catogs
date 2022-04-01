@@ -8,6 +8,6 @@ export default function Search(){
                     <input type="checkbox" />
                     <span className="slider round"></span>
                 </label>
-                <p className='switchertext'>&#8592; search for <span>DOGS</span></p>
+                <p className='switchertext'>search for <span>DOGS</span></p>
             </nav>
 }

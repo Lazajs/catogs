@@ -1,3 +1,4 @@
+
 .content{
     height: 100%;
     margin: 1rem;
@@ -13,5 +14,30 @@
     height: 5rem;
     border: none;
     outline: none;
-    /* background-color: ; */
+    background-color: #C4C4C4;
+    font-family: 'Noto serif Bold';
+    display: block;
+    cursor: pointer;
+}
+
+@media (min-width: 1023px) {
+    .content, .pageup {
+        width: 70vw;
+        margin-left: auto;
+    }
+
+    .content {
+        position: relative;
+        top: 1rem;
+    }
+
+    .pageup {
+        margin-right: 1rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    .content, .pageup {
+        width: 75%;
+    }
 }

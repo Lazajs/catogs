@@ -4,7 +4,7 @@
   margin-bottom: 3rem;
 }
 
-.searchbox .search {
+  .search {
     background-color: #727272;
     border-radius: 40px;
     display: block;
@@ -36,9 +36,7 @@ p.switchertext {
     margin: 0 0 0 1rem;
 }
 
-p.switchertext::first-letter{ 
-  font-size: 3rem;
-}
+
 
 /* Switcher  */
 .switch {
@@ -103,4 +101,25 @@ p.switchertext::first-letter{
   
   .slider.round:before {
     border-radius: 50%;
+  }
+
+  @media (min-width: 1023px) {
+    .searchbox {
+      width: 25%;
+      height: 100%;
+      position: fixed;
+      margin: auto;
+    }
+
+    .search {
+     height: 2rem;
+     width: 100%;
+    }
+  }
+
+
+  @media (min-width: 1440px) {
+    .searchbox {
+      width: 20%;
+    }   
   }
