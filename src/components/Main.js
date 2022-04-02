@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react"
-import getDogs from "../services/getDogs"
 import Dog from "./Dog"
 import Search from "./Search"
 import './Main.css'
 import Footer from "./Footer"
+import useAnimals from "../hooks/useAnimals"
 
 export default function Main(){
-    const [shown, setShown] = useState([])
-    
-    //opciones de request, falta hacerlo declarativo
-    const options = {
-        page: 1,
-        limit: 20,
-    }
+    const [shown, setShown] = useState([]) //animales que son mostrados
+    const createAnimals = useAnimals()
 
-    useEffect(()=>{
-        //request
-        getDogs(options).then(res => setShown(prev => prev.concat(res)))
+
+    useEffect(()=> {
+        createAnimals().then(res => setShown(res))
     },[])
 
  
@@ -31,7 +26,7 @@ export default function Main(){
             </main> 
         </div>
 
-        <button onClick={options.page++} className="pageup">More...</button>
+        <button className="pageup">More...</button>
 
         <Footer />
     </>
