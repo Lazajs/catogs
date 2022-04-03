@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Dog from "./Dog"
+import Animal from "./Animal"
 import Search from "./Search"
 import './Main.css'
 import Footer from "./Footer"
@@ -9,6 +9,9 @@ export default function Main(){
     const [shown, setShown] = useState([]) //animales que son mostrados
     const createAnimals = useAnimals()
 
+    const handleClick = () => {
+        createAnimals(true).then(res => setShown(prev => prev.concat(res))) //pasar un argumento truthy carga la siguiente página
+    }
 
     useEffect(()=> {
         createAnimals().then(res => setShown(res))
@@ -21,12 +24,12 @@ export default function Main(){
         <div className="wrapper">     
             <main className="content">
                 {
-                    shown ? shown.map(each => <Dog key={each.id} {...each}/>) : ''
+                    shown ? shown.map(each => <Animal key={each.id} {...each}/>) : ''
                 }
             </main> 
         </div>
 
-        <button className="pageup">More...</button>
+        <button onClick={handleClick} className="pageup">More...</button>
 
         <Footer />
     </>

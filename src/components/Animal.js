@@ -1,6 +1,6 @@
-import './Dog.css'
+import './Animal.css'
 
-export default function Dog({image, name}){
+export default function Animal({image, name}){
 
 
 
