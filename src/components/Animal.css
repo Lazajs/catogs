@@ -1,7 +1,7 @@
 .container {
     position: relative;
     height: 100%;
-    background-color: #E3E2E2;
+    background-color: #848484;
 }
 
 .container:hover {
@@ -27,4 +27,32 @@
     padding-top: .6rem;
     height: 4rem;
     margin: 0;
+}
+
+.star {
+    width: 100%;
+    transform: scale(.3);
+    background-color: transparent;
+    user-select: none;
+    position: relative;
+    top: -4rem;
+    filter: invert();
+}
+
+.more-button {
+    font-size: 'Noto Serif Bold';
+    background-color: #727272;
+    position: absolute;
+    width: 50%;
+    display: block;
+    margin: auto;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    padding: 1rem;
+    color: white;
+    z-index: 10;
+    bottom:20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

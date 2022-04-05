@@ -5,6 +5,7 @@ import './Main.css'
 import Footer from "./Footer"
 import useAnimals from "../hooks/useAnimals"
 
+
 export default function Main(){
     const [shown, setShown] = useState([]) //animales que son mostrados
     const createAnimals = useAnimals()
