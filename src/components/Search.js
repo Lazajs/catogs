@@ -6,7 +6,8 @@ export default function Search({show}){
     const [search, setSpecies, species] = useSearch()
 
     const handleChange = debounce((e) => {
-        search(e.target.value).then(res => show(res))
+        if(e.target.value) search(e.target.value).then(res => show(res))
+        
     }, 500)
 
     return <nav className="searchbox">
