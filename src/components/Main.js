@@ -11,16 +11,18 @@ export default function Main(){
     const createAnimals = useAnimals()
 
     const handleClick = () => {
+        //load more
         createAnimals(true).then(res => setShown(prev => prev.concat(res))) //pasar un argumento truthy carga la siguiente página
     }
 
     useEffect(()=> {
+        //initial animals shown
         createAnimals().then(res => setShown(res))
     },[])
 
  
     return  <>
-        <Search />
+        <Search show={setShown} />
 
         <div className="wrapper">     
             <main className="content">

@@ -1,13 +1,21 @@
 import './Search.css'
+import useSearch from '../hooks/useSearch'
+import debounce from 'just-debounce-it'
 
-export default function Search(){
+export default function Search({show}){
+    const [search, setSpecies, species] = useSearch()
+
+    const handleChange = debounce((e) => {
+        search(e.target.value).then(res => show(res))
+    }, 500)
+
     return <nav className="searchbox">
                 <p>Search by breed</p>
-                <input className='search' type='text'/>
+                <input onChange={handleChange} className='search' type='text'/>
                 <label className="switch"> 
-                    <input type="checkbox" />
+                    <input onClick={()=> setSpecies(prev => prev === 'dog' ? 'cat' : 'dog')} type="checkbox" />
                     <span className="slider round"></span>
                 </label>
-                <p className='switchertext'>search for <span>DOGS</span></p>
+                <p className='switchertext'>search for <span>{species +'s'}</span></p>
             </nav>
 }

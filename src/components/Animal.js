@@ -3,25 +3,20 @@ import { useState } from 'react'
 import star from '../images/star.svg'
 import starred from '../images/starred.svg'
 
-export default function Animal({image, name}){
-    const [details, setDetails] = useState(false)
-    const [isStarred, setStarred] = useState(false)
-
-
-    const handleClick = ()=>{
-        // show more
-    }
-
+export default function Animal({image, name, reference_image_id}){
+    const [details, setDetails] = useState({show: false, fav: false})
+    
+    const handleClick= () => {}
 
     const handleDetails = (e)=>{    
     // access to animal details 
         let target = String(e.target.className)
 
         if (target.includes('image') || target.includes('container')) {
-            setDetails(details ? false : true)
+            setDetails({...details, show: details.show ? false : true })
 
         } else if (target.includes('star')) {
-            setStarred(prev => prev ? false : true)
+            setDetails({...details, fav: details.fav ? false : true })
         } else if (target.includes('more-button')) {
             handleClick()
         }
@@ -31,14 +26,16 @@ export default function Animal({image, name}){
     if (image) {
         return <div onClick={handleDetails} className='container'>
                 {
-                    !details ? <img alt='dog' src={image.url} className='image' />
+                    !details.show ? <img alt='animal' src={image.url} className='image' />
                             : <> 
-                                <img alt='star' src={isStarred ? starred : star} className='star' />
+                                <img alt='star' src={details.fav ? starred : star} className='star' />
                                 <button className='more-button'>More</button>
                               </>
                 }   
                     <p>{name}</p>
                 </div>
 
-    }   
+    }  else if (!image && name) {
+        console.log('ass')
+    }
 }
