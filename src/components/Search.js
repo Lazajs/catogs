@@ -2,19 +2,26 @@ import './Search.css'
 import useSearch from '../hooks/useSearch'
 import debounce from 'just-debounce-it'
 import getImage from '../services/getImage'
+import { useLocation } from 'wouter'
 
 export default function Search({initialAnimals, show}){
     const [search, setSpecies, species] = useSearch()
+    const [, navigate] = useLocation()
 
     const handleChange = debounce((e) => { //do a request when the input change, debounced
         show([])
         if(e.target.value !== '') {
+            navigate(`/search/${e.target.value}`)
             search(e.target.value).then(resObj => {
                 resObj.forEach(el => {
                     getImage(species, el.reference_image_id).then(image =>  show(prev => prev.concat([{...el, image}])))
                 })
             })
-        } else if (e.target.value === '') initialAnimals().then(res => show(res))
+        } else if (e.target.value === '') {
+            navigate('/')
+            initialAnimals().then(res => show(res))
+        }
+
     }, 500)
 
     return <nav className="searchbox">

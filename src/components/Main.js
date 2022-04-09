@@ -4,6 +4,7 @@ import Search from "./Search"
 import './Main.css'
 import Footer from "./Footer"
 import useAnimals from "../hooks/useAnimals"
+import { Route } from "wouter"
 
 
 export default function Main(){
@@ -24,16 +25,26 @@ export default function Main(){
     return  <>
         <Search initialAnimals={createAnimals} show={setShown} />
 
-        <div className="wrapper">     
-            <main className="content">
-                {
-                    shown ? shown.map(each => <Animal key={each.id} {...each}/>) : ''
-                }
-            </main> 
-        </div>
+        <Route path="/" >
+            <div className="wrapper">     
+                <main className="content">
+                    {
+                        shown ? shown.map(each => <Animal key={each.id} {...each}/>) : ''
+                    }
+                </main> 
+            </div>
+            <button onClick={handleClick} className="pageup">More animals</button>
+        </Route>
 
-        <button onClick={handleClick} className="pageup">More animals</button>
-
+        <Route path="/search/:query">
+            <div className="wrapper">     
+                <main className="content">
+                    {
+                        shown ? shown.map(each => <Animal key={each.id} {...each}/>) : ''
+                    }
+                </main> 
+            </div>
+        </Route>
         <Footer />
     </>
     
