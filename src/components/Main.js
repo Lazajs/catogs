@@ -9,20 +9,20 @@ import useAnimals from "../hooks/useAnimals"
 export default function Main(){
     const [shown, setShown] = useState([]) //animales que son mostrados
     const createAnimals = useAnimals()
+    
+    useEffect(()=> {
+        //initial animals shown
+        createAnimals().then(res => setShown(res))
+    },[])
 
     const handleClick = () => {
         //load more
         createAnimals(true).then(res => setShown(prev => prev.concat(res))) //pasar un argumento truthy carga la siguiente página
     }
 
-    useEffect(()=> {
-        //initial animals shown
-        createAnimals().then(res => setShown(res))
-    },[])
-
  
     return  <>
-        <Search show={setShown} />
+        <Search initialAnimals={createAnimals} show={setShown} />
 
         <div className="wrapper">     
             <main className="content">
@@ -32,7 +32,7 @@ export default function Main(){
             </main> 
         </div>
 
-        <button onClick={handleClick} className="pageup">More...</button>
+        <button onClick={handleClick} className="pageup">More animals</button>
 
         <Footer />
     </>

@@ -2,7 +2,7 @@ import getCats from "../services/getCats";
 import getDogs from '../services/getDogs'
 
 const options = {
-    page: 1,
+    page: 0,
     limit: 10,
 }
 
@@ -27,6 +27,7 @@ function shuffle(array) {
   
 async function doRequests(nextPage){
     if (nextPage) options.page++
+    else options.page = 0
     // do the requests and return the shuffled
     let reqCats = await getCats(options)
     let reqDogs = await getDogs(options)

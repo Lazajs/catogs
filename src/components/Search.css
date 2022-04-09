@@ -4,19 +4,19 @@
   margin-bottom: 3rem;
 }
 
-  .search {
-    background-color: #727272;
-    border-radius: 40px;
-    display: block;
-    margin: auto;
-    height: 3rem;
-    width: 80%;
-    outline: none;
-    border: none;
-    font-family: 'Noto Serif', sans-serif;
-    font-size: 2rem;
-    padding: 2rem;
-    color: #E3E2E2;
+.search {
+  background-color: #727272;
+  border-radius: 40px;
+  display: block;
+  margin: auto;
+  height: 3rem;
+  width: 80%;
+  outline: none;
+  border: none;
+  font-family: 'Noto Serif', sans-serif;
+  font-size: 2rem;
+  padding: 2rem;
+  color: #E3E2E2;
 }
 
 .searchbox > p {
@@ -106,9 +106,9 @@ p.switchertext {
   @media (min-width: 1023px) {
     .searchbox {
       width: 25%;
-      height: 100%;
+      height: fit-content;
       position: fixed;
-      margin: auto;
+      margin-left: 3rem;
     }
 
     .search {

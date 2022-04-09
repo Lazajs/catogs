@@ -1,11 +1,11 @@
 .container {
     position: relative;
     height: 100%;
-    background-color: #848484;
 }
 
+
 .container:hover {
-    outline: 10px solid white;
+    outline: 5px solid white;
 }
 
 .image {
@@ -13,6 +13,12 @@
     object-position: center;
     max-width: 100%;
     height:100%;
+}
+
+.container .image.filter {
+    filter: brightness(58%);
+    z-index: 1;
+    /* filter: blur(98px); */
 }
 
 .container p {
@@ -29,15 +35,33 @@
     margin: 0;
 }
 
+.starred.star { 
+    filter: none;
+}
+
 .star {
-    width: 100%;
-    transform: scale(.3);
+    transform: scale(.25);
     background-color: transparent;
     user-select: none;
-    position: relative;
-    top: -4rem;
+    position: absolute;
+    top: -10rem;
+    left: 0;
     filter: invert();
+    z-index: 2;
 }
+
+@media (min-width: 1023px) {
+    .star {
+        top: -5rem;
+    }
+}
+
+@media (min-width: 429px) {
+    .star{
+        top: -5rem;
+    }
+}
+
 
 .more-button {
     font-size: 'Noto Serif Bold';
