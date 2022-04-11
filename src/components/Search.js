@@ -1,7 +1,7 @@
 import './Search.css'
-import useSearch from '../hooks/useSearch'
+import useSearch from 'hooks/useSearch'
 import debounce from 'just-debounce-it'
-import getImage from '../services/getImage'
+import getImage from 'services/getImage'
 import { useLocation } from 'wouter'
 
 export default function Search ({ initialAnimals, show }) {

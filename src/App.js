@@ -1,6 +1,6 @@
-import Main from "./components/Main";
+import Main from "components/Main";
 import { useState } from 'react'
-import Footer from "./components/Footer";
+import Footer from "components/Footer";
 
 function App() {
   const [shown, setShown] = useState([])

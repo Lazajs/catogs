@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-indent */
 import './Animal.css'
 import { useState } from 'react'
-import star from '../images/star.svg'
-import starred from '../images/starred.svg'
+import star from 'images/star.svg'
+import starred from 'images/starred.svg'
 import { useLocation } from 'wouter'
 
 export default function Animal ({ image, name }) {

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Animal from './Animal'
 import Search from './Search'
 import './Main.css'
-import useAnimals from '../hooks/useAnimals'
+import useAnimals from 'hooks/useAnimals'
 import { Route } from 'wouter'
 import Detail from './Detail'
 

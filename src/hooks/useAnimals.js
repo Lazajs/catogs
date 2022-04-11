@@ -1,5 +1,5 @@
-import getCats from '../services/getCats'
-import getDogs from '../services/getDogs'
+import getCats from 'services/getCats'
+import getDogs from 'services/getDogs'
 
 const options = {
   page: 0,
