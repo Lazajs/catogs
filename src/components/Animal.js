@@ -3,13 +3,13 @@ import './Animal.css'
 import { useState } from 'react'
 import star from '../images/star.svg'
 import starred from '../images/starred.svg'
+import { useLocation } from 'wouter'
 
 export default function Animal ({ image, name }) {
   const [details, setDetails] = useState({ show: false, fav: false })
   const { show, fav } = details
-
-  // show more detail onclick btn
-  const handleClick = () => {}
+  const [, navigate] = useLocation()
+  const which = String(image.url).includes('cat') ? 'cat' : 'dog'
 
   const handleDetails = (e) => {
     // access to animal details
@@ -20,7 +20,7 @@ export default function Animal ({ image, name }) {
     } else if (target.includes('star')) {
       setDetails({ ...details, fav: !fav })
     } else if (target.includes('more-button')) {
-      handleClick()
+      navigate(`/detail/${which}/${name}`)
     }
   }
 

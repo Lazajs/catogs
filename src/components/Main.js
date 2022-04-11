@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Animal from './Animal'
 import Search from './Search'
 import './Main.css'
-import Footer from './Footer'
 import useAnimals from '../hooks/useAnimals'
 import { Route } from 'wouter'
+import Detail from './Detail'
 
-export default function Main () {
-  const [shown, setShown] = useState([]) // animales que son mostrados
+export default function Main ({shown, setShown}) {
+  // animales que son mostrados
   const createAnimals = useAnimals()
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Main () {
         <div className='wrapper'>
           <main className='content'>
             {
-                        shown ? shown.map(each => <Animal key={each.id} {...each} />) : ''
+                        shown ? shown.map(each => <Animal key={each.id} {...each} current={shown} />) : ''
                     }
           </main>
         </div>
@@ -45,12 +45,9 @@ export default function Main () {
         </div>
       </Route>
 
-      <Route path='/detail/:query'>
-        <h1>asdf</h1>
-
+      <Route path='/detail/:animal/:name'>
+        <Detail current={shown} />
       </Route>
-
-      <Footer />
     </>
   )
 }
