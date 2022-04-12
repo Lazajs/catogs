@@ -8,7 +8,7 @@ import { useLocation } from 'wouter'
 export default function Animal ({ image, name }) {
   const [details, setDetails] = useState({ show: false, fav: false })
   const { show, fav } = details
-  const [, navigate] = useLocation()
+  const [location, navigate] = useLocation()
   const which = String(image.url).includes('cat') ? 'cat' : 'dog'
 
   const handleDetails = (e) => {
@@ -20,7 +20,8 @@ export default function Animal ({ image, name }) {
     } else if (target.includes('star')) {
       setDetails({ ...details, fav: !fav })
     } else if (target.includes('more-button')) {
-      navigate(`/detail/${which}/${name}`)
+      let order = location.at(-1) === '/' ? location.slice(0,-1) : location
+      navigate(location.includes('search') ? order + `/detail/${which}/${name}` : `/detail/${which}/${name}`)
     }
   }
 

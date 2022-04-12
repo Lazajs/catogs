@@ -2,6 +2,14 @@
     background-color: #E3E2E2;
 }
 
+body{
+    overflow: auto;
+}
+
+.disable {
+    overflow-y: hidden;
+}
+
 @font-face {
     font-family: 'Noto Serif';
     src: url('./fonts/NotoSerif-Regular.ttf');

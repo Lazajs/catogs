@@ -3,12 +3,13 @@ import Animal from './Animal'
 import Search from './Search'
 import './Main.css'
 import useAnimals from 'hooks/useAnimals'
-import { Route } from 'wouter'
+import { Route, useLocation } from 'wouter'
 import Detail from './Detail'
 
 export default function Main ({shown, setShown}) {
   // animales que son mostrados
   const createAnimals = useAnimals()
+  const [location] = useLocation()
 
   useEffect(() => {
     // initial animals shown
@@ -46,8 +47,26 @@ export default function Main ({shown, setShown}) {
       </Route>
 
       <Route path='/detail/:animal/:name'>
-        <Detail current={shown} />
+            <Detail current={shown} />
+        <div className='wrapper disable'>
+          <main className='content'>
+            {
+                        shown ? shown.map(each => <Animal key={each.id} {...each} />) : ''
+                    }
+          </main>
+        </div>
       </Route>
+
+    <Route path='/search/:query/detail/:animal/:name'>
+    <Detail current={shown} />
+        <div className='wrapper disable'>
+          <main className='content'>
+            {
+                        shown ? shown.map(each => <Animal key={each.id} {...each} />) : ''
+                    }
+          </main>
+        </div>
+    </Route>
     </>
   )
 }

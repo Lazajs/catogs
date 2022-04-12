@@ -1,14 +1,48 @@
+import './Detail.css'
 import { useLocation } from "wouter"
+import Loader from './Loader'
+import { useState, useEffect } from 'react'
 
 export default function Detail({current}){
-    const [location,] = useLocation()
-    // const race = location.slice(location.indexOf('l/')+2, location.lastIndexOf('/'))
-    const name = location.slice(location.lastIndexOf(location.slice(location.indexOf('l/')+2, location.lastIndexOf('/')))+4).replace('%20', ' ')
-    let thisAnimal = current.find(n => n.name === name)
-    console.log(name)
-    console.log(thisAnimal)
+    const [location, navigate] = useLocation() 
+    const [loadAnimal, setLoad] = useState(false)
+
+    useEffect(()=>{ //is ready yet?
+        if (current !== undefined) setLoad(current)
+    },[current])
+
+    useEffect(()=>{
+        document.body.classList.toggle('disable')
+
+        return ()=> document.body.classList.toggle('disable')
+    }, [])
+
+
+    //get the info for this one
+    const breed = location.slice(location.lastIndexOf(location.slice(location.indexOf('l/')+2, location.lastIndexOf('/')))+4).replaceAll('%20', ' ')
+    const thisAnimal = loadAnimal ? loadAnimal.find(n => n.name === breed) : ''
+    const previous = location.slice(0,location.indexOf('detail'))
+    
     return (
-        <article>
+        <article className="detail">
+            <button onClick={()=> navigate(previous)} className='quit'>&#10006;</button>
+            {
+                !thisAnimal ?   <Loader /> 
+                            :   <span className='information'>
+                                    <img className='photo' src={thisAnimal.image.url}/>
+                                    <p className='text name'>{thisAnimal.name}</p>
+                                    <p className='text'><span>Temperament:</span> {thisAnimal.temperament}.</p>
+                                    <p className='text'><span>Life span:</span> {thisAnimal.life_span}.</p>
+                                    {
+                                        location.includes('dog')    ?  <>
+                                            <p className='text'><span>Breed group:</span> {thisAnimal.breed_group}</p>
+                                            <p className='text'><span>Breed for:</span> {thisAnimal.bred_for}</p>
+                                            </>                     : <>
+                                            <p className='text'><span>Description:</span> {thisAnimal.description}</p>
+                                            </>
+                                    }
+                                </span>
+            }
 
         </article>
     )
