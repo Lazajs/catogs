@@ -1,36 +1,41 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import Animal from './Animal'
 import Search from './Search'
 import './Main.css'
 import useAnimals from 'hooks/useAnimals'
-import { Route, useLocation } from 'wouter'
+import { Route } from 'wouter'
 import Detail from './Detail'
+import {AnimalCTX} from "context/AnimalCTX";
 
-export default function Main ({shown, setShown}) {
+export default function Main () {
+  const context = useContext(AnimalCTX) //this is a reducer, receives an object of action, and payload
+  const {info, setInfo, ACTIONS} = context
+  const {shown, search} = info
+
   // animales que son mostrados
   const createAnimals = useAnimals()
-  const [location] = useLocation()
 
   useEffect(() => {
-    // initial animals shown
-    createAnimals().then(res => setShown(res))
-  }, [])
+    // initial animals info
+    if (!shown.length) createAnimals().then(res => setInfo({action: ACTIONS.PUT, payload: res}))
+    // else if (search) setInfo({action: ACTIONS.SEARCH, payload: search})
+  }, [shown])
 
   const handleClick = () => {
     // load more
-    createAnimals(true).then(res => setShown(prev => prev.concat(res))) // pasar un argumento truthy carga la siguiente página
+    createAnimals(true).then(res => setInfo({action: ACTIONS.ADD, payload: res})) // pasar un argumento truthy carga la siguiente página
   }
 
   return (
     <>
-      <Search initialAnimals={createAnimals} show={setShown} />
+      <Search utils={context} />
 
       <Route path='/'>
         <div className='wrapper'>
           <main className='content'>
             {
-                        shown ? shown.map(each => <Animal key={each.id} {...each} current={shown} />) : ''
-                    }
+              shown ? shown.map(each => <Animal key={each.id} {...each} />) : ''
+            }
           </main>
         </div>
         <button onClick={handleClick} className='pageup'>More animals</button>
@@ -40,7 +45,7 @@ export default function Main ({shown, setShown}) {
         <div className='wrapper'>
           <main className='content'>
             {
-                        shown ? shown.map(each => <Animal key={each.id} {...each} />) : ''
+                        search ? search.map(each => <Animal key={each.id} {...each} />) : ''
                     }
           </main>
         </div>
@@ -58,7 +63,7 @@ export default function Main ({shown, setShown}) {
       </Route>
 
     <Route path='/search/:query/detail/:animal/:name'>
-    <Detail current={shown} />
+    <Detail current={search} />
         <div className='wrapper disable'>
           <main className='content'>
             {

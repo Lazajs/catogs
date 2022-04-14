@@ -1,14 +1,14 @@
 import Main from "components/Main";
-import { useState } from 'react'
 import Footer from "components/Footer";
+import AnimalProvider from "context/AnimalCTX";
 
 function App() {
-  const [shown, setShown] = useState([])
   // main page (home)
-  return (<>
-        <Main shown={shown} setShown={setShown} />
+  return (
+      <AnimalProvider>
+        <Main />
         <Footer />
-        </>
+      </AnimalProvider>
   )
 }
 

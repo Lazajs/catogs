@@ -9,7 +9,14 @@ export default function Animal ({ image, name }) {
   const [details, setDetails] = useState({ show: false, fav: false })
   const { show, fav } = details
   const [location, navigate] = useLocation()
-  const which = String(image.url).includes('cat') ? 'cat' : 'dog'
+
+  let which; 
+  try {
+    which = String(image.url).includes('cat') ? 'cat' : 'dog'
+  } catch (e) {
+    console.log(name)
+  }
+    
 
   const handleDetails = (e) => {
     // access to animal details
@@ -25,7 +32,7 @@ export default function Animal ({ image, name }) {
     }
   }
 
-  if (image.url) {
+  if (image) {
     return (
       <div onClick={handleDetails} className='container'>
         {
@@ -42,5 +49,5 @@ export default function Animal ({ image, name }) {
         <p>{name}</p>
       </div>
     )
-  }
+  } else return  ''
 }

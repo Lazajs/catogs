@@ -1,28 +1,27 @@
 import './Detail.css'
 import { useLocation } from "wouter"
 import Loader from './Loader'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 export default function Detail({current}){
     const [location, navigate] = useLocation() 
     const [loadAnimal, setLoad] = useState(false)
 
     useEffect(()=>{ //is ready yet?
-        if (current !== undefined) setLoad(current)
+        if (current !== undefined) setLoad(true)
     },[current])
 
     useEffect(()=>{
         document.body.classList.toggle('disable')
-
         return ()=> document.body.classList.toggle('disable')
     }, [])
 
-
-    //get the info for this one
-    const breed = location.slice(location.lastIndexOf(location.slice(location.indexOf('l/')+2, location.lastIndexOf('/')))+4).replaceAll('%20', ' ')
-    const thisAnimal = loadAnimal ? loadAnimal.find(n => n.name === breed) : ''
+    //get the info for this on
+    const breed = useMemo(()=> location.slice(location.lastIndexOf(location.slice(location.indexOf('l/')+2, location.lastIndexOf('/')))+4).replaceAll('%20', ' '), [location])
+    const thisAnimal = loadAnimal ? current.find(n => n.name === breed) : ''
     const previous = location.slice(0,location.indexOf('detail'))
-    
+    console.log(breed)
+
     return (
         <article className="detail">
             <button onClick={()=> navigate(previous)} className='quit'>&#10006;</button>
